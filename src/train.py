@@ -31,7 +31,7 @@ if __name__=='__main__':
                       feature_fraction_seed=7,
                       verbose=-1,
                       )
-    df_train = pd.read_csv(args.train)
+    df_train = pd.read_csv(os.path.join(args.train, 'Train_House_Prices.csv'))
     X_train = df_train.drop(columns = 'SalePrice')
     y_train = df_train[['SalePrice']]
     model.fit(X_train, y_train)
