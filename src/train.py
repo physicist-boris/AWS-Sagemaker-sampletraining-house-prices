@@ -3,6 +3,7 @@ import joblib
 import argparse
 import os
 import pandas as pd
+import re
 
 if __name__=='__main__':
     
@@ -32,7 +33,8 @@ if __name__=='__main__':
                       verbose=-1,
                       )
     df_train = pd.read_csv(os.path.join(args.train, 'Train_House_Prices.csv'))
-    X_train = df_train.drop(columns = 'SalePrice')
-    y_train = df_train[['SalePrice']]
+    df_train_2 = df_train.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
+    X_train = df_train_2.drop(columns = df_train.columns[-1])
+    y_train = df_train_2[[df_train.columns[-1]]]
     model.fit(X_train, y_train)
     joblib.dump(model, os.path.join(args.modeldir, "model.joblib"))
