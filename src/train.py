@@ -1,5 +1,5 @@
 from lightgbm import LGBMRegressor
-from sklearn.externals import joblib
+import joblib
 import argparse
 import os
 import pandas as pd
